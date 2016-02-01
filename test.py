@@ -16,20 +16,15 @@ if __name__ == '__main__':
 	port = Manager._default_port
 
 	if mode == 'manager':
-		Manager.class_init(mode)
-		manager = Manager('', port)
-		raw_input('Press any key to continue...')
-		manager.shutdown()
+		manager = Manager.master(port)
+		raw_input('Press any key to quit...')
+		manager.terminate()
 
 	elif mode == 'worker':
-		Manager.class_init(mode)
-		manager = Manager(host, port)
-		Worker.launch(manager, 2)
+		Worker.launch(host, port, 2)
 
 	elif mode == 'client':
-		Manager.class_init(mode)
-		manager = Manager(host, port)
-		client = Client(manager)
+		client = Client(host, port)
 		print client.map(my_func, range(10))
 
 	else:

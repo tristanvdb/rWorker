@@ -8,9 +8,10 @@ from multiprocessing import Process
 from manager import Manager
 
 class Worker:
-	def __init__(self, manager, ID):
-		self.queue = manager.get_queue()
-		self.results = manager.get_results()
+	def __init__(self, host, port, ID):
+		self.manager = Manager.slave(host, port)
+		self.queue = self.manager.get_queue()
+		self.results = self.manager.get_results()
 		self.ID = ID
 
 	def run(self):
