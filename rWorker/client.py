@@ -4,10 +4,9 @@ from .manager import Manager
 from .job import Job
 
 class Client:
-	def __init__(self, host, port):
-		self.manager = Manager.slave(host, port)
-		self.queue = self.manager.get_queue()
-		self.results = self.manager.get_results()
+	def __init__(self, manager):
+		self.queue = manager.get_queue()
+		self.results = manager.get_results()
 
 	def submit(self, func, args, priority=0):
 		job = Job(func, args, priority)

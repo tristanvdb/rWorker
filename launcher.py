@@ -6,7 +6,9 @@ from rWorker.manager import Manager
 from rWorker.worker import Worker
 from rWorker.client import Client
 
-from tests.sleep import launch
+def my_func(args):
+	time.sleep(1)
+	return args**2
 
 if __name__ == '__main__':
 	mode = sys.argv[1]
@@ -22,9 +24,8 @@ if __name__ == '__main__':
 		Worker.launch(host, port, 2)
 
 	elif mode == 'client':
-		manager = Manager.slave(host, port)
-		client = Client(manager)
-		launch(client)
+		client = Client(host, port)
+		print client.map(my_func, range(10))
 
 	else:
 		assert False

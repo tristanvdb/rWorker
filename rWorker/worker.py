@@ -8,10 +8,9 @@ from multiprocessing import Process
 from manager import Manager
 
 class Worker:
-	def __init__(self, host, port, ID):
-		self.manager = Manager.slave(host, port)
-		self.queue = self.manager.get_queue()
-		self.results = self.manager.get_results()
+	def __init__(self, manager, ID):
+		self.queue = manager.get_queue()
+		self.results = manager.get_results()
 		self.ID = ID
 
 	def run(self):
@@ -21,7 +20,8 @@ class Worker:
 			self.results.update({ job.ID : job.func(job.args) })
 
 	@staticmethod
-	def launch(manager, num_workers):
+	def launch(host, port, num_workers):
+		manager = Manager.slave(host, port)
 		processes = [ Process(target=Worker.run, args=(Worker(manager, i),)) for i in range(num_workers) ]
 
 		for process in processes:
