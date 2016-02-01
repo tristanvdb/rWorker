@@ -13,10 +13,8 @@ Clients submit Jobs to the manager.
 ### TODO
 
  * Next:
-    * packaging
-    * clean termination of workers
     * manager launched workers on remote hosts
+ * Later:
+    * packaging???
     * making Job's function available to worker live (might get really hard)
- * Features:
-    * ...
 
