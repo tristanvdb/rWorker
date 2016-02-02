@@ -73,6 +73,8 @@ if __name__ == '__main__':
 			mode = sys.argv[i].split('=')[1]
 		elif sys.argv[i].startswith('--module'):
 			module = sys.argv[i].split('=')[1]
+		elif sys.argv[i].startswith('--host'):
+			host = sys.argv[i].split('=')[1]
 		elif sys.argv[i].startswith('--workers'):
 			workers = sys.argv[i].split('=')[1]
 		elif sys.argv[i].startswith('--port'):
@@ -136,6 +138,8 @@ if __name__ == '__main__':
 			command  = 'python ' + worker['path'] + '/launcher.py --mode=worker --module=' + module + ' --host=' + host + ' --port=' + str(port)
 			if 'num' in worker:
 				command += ' --num=' + str(worker['num'])
+
+			print hostname + ': command: ' + command
 
 			worker.update({ 'ssh' : ssh_connect(hostname=hostname, username=username, port=port) })
 			worker.update({ 'inouterr' : worker['ssh'].exec_command(command) })
