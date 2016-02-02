@@ -135,7 +135,9 @@ if __name__ == '__main__':
 			hostname = worker['hostname']
 			username = worker['username'] if 'username' in worker else None
 			port     = worker['ssh-port'] if 'ssh-port' in worker else None
-			command  = 'python ' + worker['path'] + '/launcher.py --mode=worker --module=' + module + ' --host=' + host + ' --port=' + str(port)
+			command  = 'python ' + worker['path'] + '/launcher.py --mode=worker --module=' + module + ' --host=' + host
+			if port != None:
+				command += ' --port=' + str(port)
 			if 'num' in worker:
 				command += ' --num=' + str(worker['num'])
 
