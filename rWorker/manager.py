@@ -6,7 +6,6 @@ import Queue
 from multiprocessing.managers import SyncManager, Value
 
 class Manager(SyncManager):
-	_default_port = 6000
 	has_instance = False
 
 	def __init__(self, host, port):

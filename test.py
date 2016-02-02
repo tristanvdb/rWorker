@@ -11,7 +11,7 @@ from tests.sleep import launch
 if __name__ == '__main__':
 	mode = sys.argv[1]
 	host = 'localhost'
-	port = Manager._default_port
+	port = 6000
 
 	if mode == 'manager':
 		manager = Manager.master(port)
